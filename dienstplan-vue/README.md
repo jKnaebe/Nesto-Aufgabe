@@ -3,7 +3,7 @@
 ## Projektinstallation
 
 1. **Terminal öffnen**  
-   Öffne ein Terminal/Fenster in deinem Projektordner.
+   Öffne eines Terminal in einem Projektordner.
 
 2. **Abhängigkeiten installieren**  
    Führe folgenden Befehl aus, um alle benötigten Pakete zu installieren:
