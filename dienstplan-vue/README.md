@@ -1,5 +1,15 @@
-# Vue 3 + TypeScript + Vite
+# Dienstplan Vue App
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Projektinstallation
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+1. **Terminal öffnen**  
+   Öffne ein Terminal/Fenster in deinem Projektordner.
+
+2. **Abhängigkeiten installieren**  
+   Führe folgenden Befehl aus, um alle benötigten Pakete zu installieren:
+   
+```bash
+   npm install
+   npm run dev
+````
+  Nach dem Start wird die App lokal unter http://localhost:5173 erreichbar sein.
