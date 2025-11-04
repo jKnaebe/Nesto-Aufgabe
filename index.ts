@@ -1,8 +1,14 @@
 /* Erstellen der Objekte */
 
+interface Shift {
+    beginning: string
+    ending: string
+}
+
 interface Store {
     name: string
     employees: string[]
+    shifts: Record<string, Shift[]>
 }
 
 interface Area {
@@ -16,11 +22,6 @@ interface Headquarter {
     name: string
     areas: Area[]
     stores: Store[]
-}
-
-interface Shift {
-    beginning: number
-    ending: number
 }
 
 /* Erstellen der Baumstruktur */
@@ -37,14 +38,53 @@ const bestFoodCompany: Headquarter = {
                     manager: "Bob",
                     areas: [],
                     stores: [
-                            {name: "Karlsruhe", employees: ["Daisy", "Daniel"]},
-                            {name: "Stuttgart", employees: ["Emil"]},
-                            {name: "München", employees: ["Fred"]}
+                            {
+                                name: "Karlsruhe", 
+                                employees: ["Daisy", "Daniel"], 
+                                shifts:{ 
+                                    "Daisy": [
+                                        {beginning: "12:00", ending: "20:00"}
+                                    ],
+                                    "Daniel": [
+                                        {beginning: "11:00", ending: "13:00"},
+                                        {beginning: "15:00", ending: "21:00"}
+                                    ]
+                                }
+                            },
+                            {
+                                name: "Stuttgart",
+                                employees: ["Emil"],
+                                shifts: {
+                                    "Emil": [
+                                        {beginning: "13:00", ending: "23:00"}
+                                    ]
+                                }
+                            },
+                            {
+                                name: "München",
+                                employees: ["Fred"],
+                                shifts: {
+                                    "Fred": [
+                                        {beginning: "12:00", ending: "18:00"}
+                                    ]
+                                }
+                            }
                     ]
                 }
             ],
             stores: [
-                {name: "Hamburg", employees: ["Claus", "Claire"]}
+                {
+                    name: "Hamburg",
+                    employees: ["Claus", "Claire"],
+                    shifts: {
+                        "Claus": [
+                            {beginning: "08:00", ending: "17:00"}
+                        ],
+                        "Claire": [
+                            {beginning: "10:00", ending: "14:00"}
+                        ]
+                    }
+                }
             ]
         }
     ],
@@ -80,6 +120,7 @@ const getAllEmployees = (hq: Headquarter): string[] => {
 }
 
 /* Ausgaben */
+
 console.log("Stores of BestFood Company:")
 getAllStores(bestFoodCompany).forEach(store => console.log(`* ${store}`))
 
