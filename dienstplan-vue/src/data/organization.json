@@ -1,0 +1,66 @@
+{
+  "headquarter": {
+    "name": "BestFood Company",
+    "areas": [
+        {
+            "name": "Deutschland",
+            "manager": "Alice",
+            "areas": [
+                {
+                    "name": "Süd",
+                    "manager": "Bob",
+                    "areas": [],
+                    "stores": [
+                            {
+                                "name": "Karlsruhe", 
+                                "employees": ["Daisy", "Daniel"], 
+                                "shifts":{ 
+                                    "Daisy": [
+                                        {"beginning": "12:00", "ending": "20:00"}
+                                    ],
+                                    "Daniel": [
+                                        {"beginning": "11:00", "ending": "13:00"},
+                                        {"beginning": "15:00", "ending": "21:00"}
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "Stuttgart",
+                                "employees": ["Emil"],
+                                "shifts": {
+                                    "Emil": [
+                                        {"beginning": "13:00", "ending": "23:00"}
+                                    ]
+                                }
+                            },
+                            {
+                                "name": "München",
+                                "employees": ["Fred"],
+                                "shifts": {
+                                    "Fred": [
+                                        {"beginning": "12:00", "ending": "18:00"}
+                                    ]
+                                }
+                            }
+                    ]
+                }
+            ],
+            "stores": [
+                {
+                    "name": "Hamburg",
+                    "employees": ["Claus", "Claire"],
+                    "shifts": {
+                        "Claus": [
+                            {"beginning": "08:00", "ending": "17:00"}
+                        ],
+                        "Claire": [
+                            {"beginning": "10:00", "ending": "14:00"}
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "stores": []
+}
+}

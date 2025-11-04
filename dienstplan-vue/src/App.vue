@@ -1,30 +1,68 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1>{{ headquarter.name }}</h1>
+
+    <label for="store-select">Wähle einen Store:</label>
+    <select id="store-select" v-model="selectedStoreName">
+      <option v-for="store in allStores" :key="store.name" :value="store.name">
+        {{ store.name }}
+      </option>
+    </select>
+
+    <div v-if="selectedStore">
+      <ShiftTimeline :store="selectedStore" />
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup lang="ts">
+import { ref, computed } from "vue";
+import ShiftTimeline from "./components/ShiftTimeline.vue";
+import data from "./data/organization.json";
+
+interface ShiftTime {
+  beginning: string;
+  ending: string;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+interface Store {
+  name: string;
+  employees: string[];
+  shifts: Record<string, ShiftTime[]>;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+interface Area {
+  name: string;
+  manager: string;
+  areas: Area[];
+  stores: Store[];
 }
-</style>
+
+interface Headquarter {
+  name: string;
+  areas: Area[];
+  stores: Store[];
+}
+
+const headquarter: Headquarter = data.headquarter;
+
+// Rekursiv alle Stores aus allen Areas sammeln
+const getAllStores = (areas: Area[]): Store[] => {
+  let result: Store[] = [];
+  areas.forEach((area) => {
+    result = result.concat(area.stores);
+    if (area.areas.length) {
+      result = result.concat(getAllStores(area.areas));
+    }
+  });
+  return result;
+};
+
+const allStores = getAllStores(headquarter.areas);
+
+// Ausgewählter Store
+const selectedStoreName = ref(allStores[0]?.name || "");
+const selectedStore = computed(() =>
+  allStores.find((s) => s.name === selectedStoreName.value)
+);
+</script>
