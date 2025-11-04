@@ -119,10 +119,31 @@ const getAllEmployees = (hq: Headquarter): string[] => {
   return result
 }
 
+const printAllSchedules = (hq: Headquarter): void => {
+  const traverseArea = (area: Area): void => {
+    area.stores.forEach(store => {
+      console.log(`Time table ${store.name}:`)
+      store.employees.forEach(employee => {
+        const shifts = store.shifts[employee]
+        const shiftText = shifts.map(s => `${s.beginning} – ${s.ending}`).join(", ")
+        console.log(`* ${employee}: ${shiftText}`)
+      })
+      console.log("")
+    })
+
+    area.areas.forEach(subArea => traverseArea(subArea))
+  }
+
+  hq.areas.forEach(area => traverseArea(area))
+}
+
 /* Ausgaben */
 
-console.log("Stores of BestFood Company:")
+console.log("Stores of BestFood Company:\n")
 getAllStores(bestFoodCompany).forEach(store => console.log(`* ${store}`))
 
-console.log("\nEmployees of BestFood Company:")
+console.log("\nEmployees of BestFood Company:\n")
 getAllEmployees(bestFoodCompany).forEach(employee => console.log(`* ${employee}`))
+
+console.log("\nShifts of BestFood Company:\n")
+printAllSchedules(bestFoodCompany)
