@@ -41,3 +41,20 @@ const bestFoodCompany: Headquarter = {
     ],
     stores: []
 }
+
+const getAllStores = (hq: Headquarter): string[] => {
+  const result: string[] = []
+
+  const traverseArea = (area: Area): void => {
+    area.stores.forEach(store => result.push(store.name))
+    area.areas.forEach(subArea => traverseArea(subArea))
+  }
+
+  hq.areas.forEach(area => traverseArea(area))
+
+  return result
+}
+
+// Ausgabe
+console.log("Stores of BestFood Company:")
+getAllStores(bestFoodCompany).forEach(store => console.log(`* ${store}`))
